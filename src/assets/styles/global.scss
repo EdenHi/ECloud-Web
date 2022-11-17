@@ -1,0 +1,24 @@
+$color: #fff;
+body {
+  background-color: $color;
+  //禁用文字选中
+  user-select: none;
+}
+img {
+  //禁止拖动图片
+  -webkit-user-drag: none;
+}
+.logo {
+  height: 32px;
+  margin: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.591);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
