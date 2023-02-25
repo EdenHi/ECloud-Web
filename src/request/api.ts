@@ -23,3 +23,7 @@ export const deleteUser = (params: any): Promise<any> => {
 export const getWarehouseInfo = (params: any): Promise<any> => {
     return request.post("/house/get/info", params);
 };
+
+export const registerUser = (params: any): Promise<any> => {
+    return request.post("/auth/register", params);
+};

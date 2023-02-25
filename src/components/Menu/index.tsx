@@ -9,6 +9,8 @@ import type {MenuProps} from "antd";
 import {Layout, Menu} from "antd";
 import React, {useState} from "react";
 import {useNavigate, useLocation} from "react-router-dom";
+import {Cache} from "three";
+import get = Cache.get;
 
 const {Sider} = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
@@ -31,11 +33,8 @@ const items: MenuItem[] = [
     getItem("仪表盘", "/page1", <PieChartOutlined/>),
     getItem("仓库管理", "/warehouses", <DesktopOutlined/>),
     getItem("用户管理", "/userList", <DesktopOutlined/>),
-    getItem("User", "sub1", <UserOutlined/>, [
-        getItem("Tom", "/sub1/page1"),
-        getItem("Bill", "/sub1/page2"),
-        getItem("Alex", "/sub1/page3"),
-    ]),
+    getItem("货物管理", "/goodsList", <DesktopOutlined/>),
+    getItem("User", "sub1", <UserOutlined/>),
     getItem("Team", "sub2", <TeamOutlined/>, [
         getItem("Team 1", "/sub2/page1"),
         getItem("Team 2", "/sub2/page2"),

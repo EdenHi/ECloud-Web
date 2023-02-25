@@ -9,6 +9,7 @@ const Page1 = lazy(() => import("@/views/page1"));
 const Warehouses = lazy(() => import("@/views/Warehouse/list"))
 const WarehouseDetail = lazy(() => import("@/views/Warehouse/detail"))
 const UserList = lazy(() => import("@/views/User/list"))
+const GoodsList = lazy(() => import("@/views/Goods/index"))
 const lazyLoading = (comp: JSX.Element): JSX.Element => (
     <React.Suspense
         fallback={
@@ -54,32 +55,8 @@ const routes = [
                 element: lazyLoading(<UserList/>)
             },
             {
-                path: "sub1/page1",
-                element: lazyLoading(<Page1/>),
-            },
-            {
-                path: "sub1/page2",
-                element: lazyLoading(<Page1/>),
-            },
-            {
-                path: "sub1/page3",
-                element: lazyLoading(<Page1/>),
-            },
-            {
-                path: "sub2/page1",
-                element: lazyLoading(<Page1/>),
-            },
-            {
-                path: "sub2/page2",
-                element: lazyLoading(<Page1/>),
-            },
-            {
-                path: "sub3/page1",
-                element: lazyLoading(<Page1/>),
-            },
-            {
-                path: "sub3/page2",
-                element: lazyLoading(<Page1/>),
+                path: "/goodsList",
+                element: lazyLoading(<GoodsList/>)
             },
         ],
     },

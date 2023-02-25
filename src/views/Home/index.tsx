@@ -2,21 +2,33 @@ import {Avatar, Breadcrumb, Dropdown, Layout, Popconfirm, Popover} from "antd";
 import SideMenu from "@/components/Menu";
 import type {MenuProps} from 'antd';
 import React, {useState} from "react";
-import {useNavigate, Outlet} from "react-router-dom";
+import {useNavigate, Outlet, useLocation, Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
 import {SmileOutlined} from "@ant-design/icons";
 
 const {Header, Content, Footer, Sider} = Layout;
 const breadcrumbNameMap: Record<string, string> = {
-    '/apps': 'Application List',
-    '/apps/1': 'Application1',
-    '/apps/2': 'Application2',
-    '/apps/1/detail': 'Detail',
+    '/warehouses': '仓库列表',
+    '/warehouses/detail': '仓库详情',
+    '/userList': '用户列表',
+    '/goodsList': '货物列表',
     '/apps/2/detail': 'Detail',
 };
 const Home: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const pathSnippets = location.pathname.split('/').filter((i) => i);
+    const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+        const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+        return (
+            <Breadcrumb.Item key={url}>
+                <Link to={url}>{breadcrumbNameMap[url]}</Link>
+            </Breadcrumb.Item>
+        );
+    });
+
+    const breadcrumbItems = extraBreadcrumbItems;
+
     const {userName} = useSelector((state: any) => {
         return {
             userName: state.handleUser.userName
@@ -34,17 +46,6 @@ const Home: React.FC = () => {
                 <div href="#" onClick={logout}>退出登录</div>
             ),
         },
-        {
-            key: '2',
-            label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                    2nd menu item (disabled)
-                </a>
-            ),
-            icon: <SmileOutlined/>,
-            disabled: true,
-        },
-
     ];
     return (
         <Layout style={{minHeight: "100vh"}}>
@@ -64,8 +65,7 @@ const Home: React.FC = () => {
                 >
                     {/* 面包屑 */}
                     <Breadcrumb style={{}}>
-                        <Breadcrumb.Item>User</Breadcrumb.Item>
-                        <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                        {breadcrumbItems}
                     </Breadcrumb>
                     <div style={{position: 'absolute', right: '1%'}}>
                         <Dropdown menu={{items}}>

@@ -68,12 +68,9 @@ const wareHouseList: React.FC = () => {
     const [searchName, setSearchName] = useState<string>('')
     const [searchStatus, setSearchStatus] = useState<number>(0)
     useEffect(() => {
-        console.log('我被挂载了！')
-
         getList().then(r => {
         })
         return () => {
-            console.log('我被销毁了！')
         }
     }, [])
     const search: PaginationProps['onShowSizeChange'] = (current, pageSize) => {
@@ -97,7 +94,8 @@ const wareHouseList: React.FC = () => {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
-            paddingBottom: 20
+            paddingBottom: 20,
+            userSelect: 'text'
         }}>
 
             <div style={{
@@ -105,7 +103,7 @@ const wareHouseList: React.FC = () => {
 
             }}>
                 <Form style={{display: 'flex', alignItems: 'center', paddingLeft: 15, paddingTop: 15}}>
-                    <Form.Item style={{width: 200}} label={'仓库Id'}>
+                    <Form.Item style={{width: 200}} label={'仓库ID'}>
                         <Input value={searchId} placeholder="请输入ID" onChange={(e) => {
 
                             setSearchId(e.target.value)
@@ -145,9 +143,11 @@ const wareHouseList: React.FC = () => {
             </div>
             <Table style={{width: '100%'}} dataSource={list as any} pagination={false} rowKey={'whId'}>
 
-                <Column title="仓库ID" dataIndex="whId" render={(_, item) => (<div onClick={() => {
-                    navigate(`/warehouses/detail`,{state:item})
-                }}>WH-{item.whId}</div>)}/>
+                <Column title="仓库ID" dataIndex="whId" render={(_, item) => (
+                    <Button type="link" onClick={() => {
+                        navigate(`/warehouses/detail`, {state: item})
+                    }}>WH-{item.whId}</Button>
+                )}/>
                 <Column title="仓库名称" dataIndex="houseName"/>
                 <Column
                     title="库存状态"
