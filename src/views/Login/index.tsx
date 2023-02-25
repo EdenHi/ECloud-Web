@@ -27,6 +27,10 @@ const Login: React.FC = () => {
     switch (res.code) {
       case 0:
         dispatch({ type: "setToken", val: res.data.token });
+        localStorage.setItem('ECloud_Token',res.data.token);
+        dispatch({ type: "setRole", val: res.data.roleID });
+        dispatch({ type: "setEmail", val: res.data.email });
+        dispatch({ type: "setName", val: res.data.userName });
         navigate("/");
         break;
       default:

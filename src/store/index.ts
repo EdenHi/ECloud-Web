@@ -26,6 +26,6 @@ const store = legacy_createStore(
   persistedReducer,
   composeEnHancers(applyMiddleware(reduxThunk))
 );
-let persistor = persistStore(store);
+const persistor = persistStore(store);
 
 export { store, persistor };

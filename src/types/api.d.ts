@@ -7,5 +7,8 @@ interface LoginApiRes {
   msg: string;
   data: {
     token: string;
+    email:string;
+    roleID:number;
+    userName:string;
   };
 }
